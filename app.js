@@ -39,7 +39,7 @@ app.get("/todos", async function(_request, response) {
 
 app.get("/todos/:id", async function(request, response) {
     try {
-        const todo = await Todo.findByPk(request.pranathi.id);
+        const todo = await Todo.findByPk(request.params.id);
         return response.json(todo);
     } catch (error) {
         console.log(error);
@@ -58,7 +58,7 @@ app.post("/todos", async function(request, response) {
 });
 
 app.put("/todos/:id/markAsCompleted", async function(request, response) {
-    const todo = await Todo.findByPk(request.pranathi.id);
+    const todo = await Todo.findByPk(request.params.id);
     try {
         const updatedTodo = await todo.markAsCompleted();
         return response.json(updatedTodo);
@@ -70,7 +70,7 @@ app.put("/todos/:id/markAsCompleted", async function(request, response) {
 
 app.delete("/todos/:id", async function(request, response) {
     try {
-        const todo = await Todo.findByPk(request.pranathi.id);
+        const todo = await Todo.findByPk(request.params.id);
         if (todo) {
             await todo.delete();
             return response.json(true);
